@@ -1,0 +1,123 @@
+/* --- SİGNAL CPU GLOBAL DEĞİŞKENLER --- */
+:root {
+    --bg-main: #020204;
+    --neon-blue: #00f2ff;
+    --neon-purple: #bc13fe;
+    --danger: #ff2e63;
+    --success: #08f7af;
+    --text-dim: #a9b1d6;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+/* --- TÜM SİTEYE ÖZEL NEON SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
+    border-radius: 100px;
+    border: 2px solid var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* --- GENEL SAYFA YAPISI --- */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-dim);
+    margin: 0;
+    background-image: radial-gradient(circle at 50% -20%, rgba(0, 242, 255, 0.1) 0%, transparent 50%);
+    min-height: 100vh;
+}
+
+/* --- KARTLAR VE CAM EFEKTİ --- */
+.stat-card-ultra {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stat-card-ultra:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 40px rgba(0, 242, 255, 0.1);
+}
+
+/* --- TERMİNAL VE LOGLAR --- */
+.terminal-window {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--glass);
+    font-family: 'JetBrains Mono', monospace;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.log-entry {
+    font-size: 11px;
+    margin-bottom: 4px;
+    border-left: 3px solid var(--neon-blue);
+    padding-left: 10px;
+    color: var(--text-dim);
+}
+
+/* --- TABLO TASARIMI --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.glow-row:hover {
+    background: rgba(0, 242, 255, 0.03) !important;
+}
+
+th {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #565f89;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+td {
+    padding: 20px;
+}
+
+/* --- INPUT VE BUTONLAR --- */
+input[type="text"] {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: var(--neon-blue);
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+}
+
+.btn-purple {
+    background: var(--neon-purple);
+    color: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-purple:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 20px var(--neon-purple);
+}

@@ -1,0 +1,138 @@
+<%- include('partials/header') %>
+
+<main class="container mx-auto px-4 lg:px-12 py-16 relative">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-64 bg-blue-600/10 blur-[120px] rounded-full -z-10"></div>
+
+    <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                <i class="fas fa-rocket animate-pulse"></i> Yeni Proje Kaydı
+            </div>
+            <h1 class="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase leading-none">
+                SİSTEME <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">BOT EKLE</span>
+            </h1>
+            <p class="text-gray-500 mt-4 font-medium max-w-md mx-auto">
+                Botunu Elecus topluluğuyla tanıştır. Formu doldur ve onay sürecini başlat.
+            </p>
+        </div>
+
+        <div class="glass bg-[#0a0a0b]/60 border border-white/5 p-6 md:p-12 rounded-[2.5rem] shadow-2xl backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-8 opacity-5 select-none">
+                <i class="fas fa-robot text-[120px] text-white"></i>
+            </div>
+
+            <form action="/addbot" method="POST" class="relative z-10 space-y-10">
+                
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3 border-l-4 border-blue-600 pl-4">
+                        <h2 class="text-sm font-black uppercase tracking-widest text-white">Temel Bilgiler</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="group space-y-2">
+                            <label class="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1 transition group-focus-within:text-blue-500">
+                                <i class="fas fa-fingerprint"></i> Discord Bot ID
+                            </label>
+                            <input type="text" name="botID" placeholder="123456789012345" required 
+                                   class="w-full bg-white/[0.03] border border-white/5 p-4 rounded-2xl text-white focus:border-blue-500 focus:bg-white/[0.05] outline-none transition-all placeholder:text-gray-700">
+                        </div>
+
+                        <div class="group space-y-2">
+                            <label class="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1 transition group-focus-within:text-blue-500">
+                                <i class="fas fa-terminal"></i> Bot Prefix
+                            </label>
+                            <input type="text" name="prefix" placeholder="Örn: !" required 
+                                   class="w-full bg-white/[0.03] border border-white/5 p-4 rounded-2xl text-white focus:border-blue-500 focus:bg-white/[0.05] outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3 border-l-4 border-blue-600 pl-4">
+                        <h2 class="text-sm font-black uppercase tracking-widest text-white">Detaylar & Etiketler</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="group space-y-2">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Sunucu</label>
+                            <input type="number" name="servers" placeholder="150" required 
+                                   class="w-full bg-white/[0.03] border border-white/5 p-4 rounded-2xl text-white focus:border-blue-500 outline-none transition-all">
+                        </div>
+                        <div class="group space-y-2">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Komut</label>
+                            <input type="number" name="commands" placeholder="50" required 
+                                   class="w-full bg-white/[0.03] border border-white/5 p-4 rounded-2xl text-white focus:border-blue-500 outline-none transition-all">
+                        </div>
+                        <div class="group space-y-2">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Kategori</label>
+                            <div class="relative">
+                                <select name="tags" class="w-full bg-white/[0.03] border border-white/5 p-4 rounded-2xl text-white focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer">
+                                    <option value="Moderasyon" class="bg-[#0a0a0b]">Moderasyon</option>
+                                    <option value="Eğlence" class="bg-[#0a0a0b]">Eğlence</option>
+                                    <option value="Ekonomi" class="bg-[#0a0a0b]">Ekonomi</option>
+                                    <option value="Müzik" class="bg-[#0a0a0b]">Müzik</option>
+                                </select>
+                                <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3 border-l-4 border-blue-600 pl-4">
+                        <h2 class="text-sm font-black uppercase tracking-widest text-white">İçerik</h2>
+                    </div>
+
+                    <div class="group space-y-2">
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1 transition group-focus-within:text-blue-500">Kısa Açıklama</label>
+                        <textarea name="shortDesc" rows="3" placeholder="Botunun farkı nedir?" required maxlength="150"
+                                  class="w-full bg-white/[0.03] border border-white/5 p-4 rounded-2xl text-white focus:border-blue-500 outline-none transition-all resize-none"></textarea>
+                        <div class="flex justify-between items-center px-1">
+                            <span class="text-[9px] text-blue-500/50 font-bold uppercase tracking-widest">Etkileyici bir cümle seç.</span>
+                            <span id="charCount" class="text-[9px] text-gray-600 font-bold uppercase">0/150</span>
+                        </div>
+                    </div>
+
+                    <div class="group space-y-2">
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Davet Linki (OAuth2)</label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500 group-focus-within:text-blue-500 transition">
+                                <i class="fas fa-link text-xs"></i>
+                            </div>
+                            <input type="url" name="invite" placeholder="https://discord.com/..." required 
+                                   class="w-full bg-white/[0.03] border border-white/5 p-4 pl-10 rounded-2xl text-white focus:border-blue-500 outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6">
+                    <button type="submit" class="group relative w-full bg-blue-600 hover:bg-blue-500 text-white p-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all duration-300 shadow-[0_0_30px_-5px_rgba(37,99,235,0.4)] overflow-hidden">
+                        <div class="relative z-10 flex items-center justify-center gap-3 group-hover:scale-105 transition-transform">
+                            <i class="fas fa-cloud-upload-alt text-lg"></i> 
+                            İncelemeye Gönder
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    </button>
+                    <p class="text-center text-gray-600 text-[10px] mt-4 font-bold uppercase tracking-widest">
+                        İşlem yaparak <a href="/terms" class="text-blue-500 hover:underline">kullanım şartlarını</a> kabul etmiş sayılırsınız.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Karakter sayacı için basit script
+    const textarea = document.querySelector('textarea[name="shortDesc"]');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', () => {
+        const length = textarea.value.length;
+        charCount.textContent = `${length}/150`;
+        if (length >= 140) charCount.classList.replace('text-gray-600', 'text-red-500');
+        else charCount.classList.replace('text-red-500', 'text-gray-600');
+    });
+</script>
+
+<%- include('partials/footer') %>

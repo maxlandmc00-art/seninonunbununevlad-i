@@ -1,0 +1,172 @@
+<%- include('partials/header') %>
+
+<div class="fixed inset-0 -z-30 bg-[#030303]"></div>
+<div class="fixed top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-to-b from-blue-600/10 via-transparent to-transparent blur-[120px] -z-10"></div>
+
+<main class="container mx-auto px-4 lg:px-16 py-12 relative">
+    
+    <div class="flex flex-col lg:flex-row justify-between items-end gap-8 mb-16">
+        <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[9px] font-bold uppercase tracking-[0.4em] mb-4">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                Sistem Global Sıralaması
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-[0.8]">
+                TOP <span class="text-transparent bg-clip-text bg-gradient-to-tr from-blue-400 via-indigo-400 to-purple-500 drop-shadow-2xl">100 ELİT</span><br>
+                <span class="text-3xl md:text-5xl opacity-40">BOT LİSTESİ</span>
+            </h1>
+        </div>
+        
+        <div class="flex gap-4 pb-2">
+            <div class="text-right border-r border-white/10 pr-6">
+                <p class="text-gray-500 text-[10px] font-black uppercase tracking-widest">Toplam Bot</p>
+                <p class="text-white text-2xl font-black italic tabular-nums"><%= bots.length %>+</p>
+            </div>
+            <div class="text-right">
+                <p class="text-gray-500 text-[10px] font-black uppercase tracking-widest">Oy Kullanıldı</p>
+                <p class="text-blue-500 text-2xl font-black italic tabular-nums">1.2M</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-12">
+        <div class="lg:col-span-8 flex flex-wrap gap-2">
+            <% ['Hepsi', 'Moderasyon', 'Müzik', 'Ekonomi', 'Oyun', 'Eğlence'].forEach(cat => { %>
+                <button class="px-6 py-3 rounded-2xl bg-white/5 border border-white/5 text-gray-400 text-xs font-black uppercase tracking-wider hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-300">
+                    <%= cat %>
+                </button>
+            <% }) %>
+        </div>
+        <div class="lg:col-span-4">
+            <div class="relative group">
+                <input type="text" id="botSearch" placeholder="Bot adını yazın..." 
+                       class="w-full bg-[#0a0a0b] border border-white/10 rounded-2xl px-6 py-3.5 text-white focus:border-blue-500/50 focus:ring-0 transition-all">
+                <i class="fas fa-search absolute right-5 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-blue-500"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20 relative">
+        <% bots.slice(0, 3).forEach((bot, index) => { 
+            const themes = [
+                { color: '#fbbf24', label: 'ALTIN', shadow: 'rgba(251, 191, 36, 0.1)', medal: '🥇' },
+                { color: '#94a3b8', label: 'GÜMÜŞ', shadow: 'rgba(148, 163, 184, 0.1)', medal: '🥈' },
+                { color: '#fb923c', label: 'BRONZ', shadow: 'rgba(251, 146, 60, 0.1)', medal: '🥉' }
+            ][index];
+        %>
+            <div class="relative group" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                <div onclick="window.location.href='/bot/<%= bot.id %>'" 
+                     class="h-full bg-gradient-to-b from-[#111113] to-[#070708] border border-white/5 rounded-[3rem] p-8 transition-all duration-500 hover:border-white/20 group-hover:-translate-y-3 cursor-pointer overflow-hidden relative shadow-2xl">
+                    
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[<%= themes.color %>] to-transparent opacity-50"></div>
+                    
+                    <div class="flex justify-between items-start mb-10">
+                        <div class="w-16 h-16 rounded-2xl bg-[#1a1a1c] border border-white/5 flex items-center justify-center text-3xl shadow-inner">
+                            <%= themes.medal %>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[<%= themes.color %>] font-black text-xs tracking-[0.3em]"><%= themes.label %></span>
+                            <span class="text-white/20 font-black text-4xl italic leading-none">#0<%= index + 1 %></span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center mb-10">
+                        <div class="relative mb-6">
+                            <div class="absolute inset-0 rounded-[2.5rem] bg-[<%= themes.color %>] blur-2xl opacity-10 group-hover:opacity-30 transition-opacity"></div>
+                            <img src="<%= bot.avatar %>" class="relative w-32 h-32 rounded-[2.5rem] object-cover border-4 border-[#0a0a0b] group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter mb-2"><%= bot.name %></h3>
+                        <p class="text-gray-500 text-sm font-medium line-clamp-2 px-4 italic">"<%= bot.description %>"</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                            <div class="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">
+                                <span>Popülerlik Skor</span>
+                                <span class="text-white"><%= Math.floor(Math.random() * 20 + 80) %>%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full bg-[<%= themes.color %>] rounded-full" style="width: <%= 100 - (index * 10) %>%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-3">
+                            <button class="flex-1 py-4 bg-white text-black font-black text-[10px] uppercase tracking-[0.2em] rounded-2xl hover:bg-[<%= themes.color %>] hover:text-white transition-colors">Detaylar</button>
+                            <button class="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-white hover:bg-blue-600 transition-colors">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <div class="bg-[#0a0a0b]/60 border border-white/5 rounded-[3rem] backdrop-blur-2xl overflow-hidden shadow-2xl">
+        <table class="w-full text-left">
+            <thead>
+                <tr class="border-b border-white/5 bg-white/[0.02]">
+                    <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Sıra</th>
+                    <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Bot Yapısı</th>
+                    <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] hidden md:table-cell">Durum</th>
+                    <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] text-right">Oylama</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+                <% bots.slice(3, 15).forEach((bot, index) => { %>
+                    <tr onclick="window.location.href='/bot/<%= bot.id %>'" 
+                        class="group hover:bg-white/[0.02] transition-all cursor-pointer">
+                        <td class="px-8 py-6">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl font-black text-gray-800 group-hover:text-blue-500 transition-colors italic tabular-nums">#<%= index + 4 %></span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6">
+                            <div class="flex items-center gap-5">
+                                <div class="relative w-14 h-14 shrink-0">
+                                    <img src="<%= bot.avatar %>" class="w-full h-full rounded-2xl object-cover border border-white/10">
+                                    <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 border-4 border-[#0a0a0b] rounded-full"></div>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-black uppercase italic group-hover:text-blue-400 transition-colors"><%= bot.name %></h4>
+                                    <div class="flex gap-2 mt-1">
+                                        <span class="text-[9px] font-bold px-2 py-0.5 bg-blue-500/10 text-blue-400 rounded-md uppercase tracking-tighter">Prefix: <%= bot.prefix %></span>
+                                        <span class="text-[9px] font-bold px-2 py-0.5 bg-white/5 text-gray-500 rounded-md uppercase tracking-tighter hidden sm:inline"><%= (bot.servers || '0').toLocaleString() %> Sunucu</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6 hidden md:table-cell">
+                            <div class="flex items-center gap-2">
+                                <div class="w-24 h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-500/40 rounded-full" style="width: <%= Math.random() * 60 + 20 %>%"></div>
+                                </div>
+                                <span class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">Stabil</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6 text-right">
+                            <div class="inline-flex flex-col items-end">
+                                <span class="text-white font-black text-xl tabular-nums"><%= bot.votes.toLocaleString() %></span>
+                                <div class="flex items-center gap-1 text-[9px] text-green-500 font-bold uppercase tracking-tighter">
+                                    <i class="fas fa-caret-up"></i>
+                                    Artışta
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        
+        <div class="p-8 flex justify-center border-t border-white/5">
+            <button class="px-12 py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all">
+                Daha Fazla Bot Görüntüle
+            </button>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
